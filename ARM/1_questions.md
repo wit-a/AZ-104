@@ -3,7 +3,7 @@
 deploy.json
 ```json
 {
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.jsonfi",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "obj1": {
@@ -20,19 +20,27 @@ deploy.json
     },
     "par1": {
       "type": "string",
-      "allowedValues": ["centralus", "eastus", "westus"],
-      "defaultValue": "eastus"
+      "allowedValues": ["westeurope", "eastus", "westus"],
+      "defaultValue": "westeurope"
+    },
+    "resourceTags": {
+      "type": "object",
+      "defaultValue": {
+        "Environment": "GP",
+        "Project": "Microsoft GP 2024"
+      }
     }
   },
   "variables": {
     "var1": "westus",
-    "centralus": "eastus"
+    "centralus": "westeurope"
   },
   "resources": [
     {
       "type": "Microsoft.Resources/resourceGroups",
       "apiVersion": "2018-05-01",
-      "location": "eastus",
+      "location": "westeurope",
+      "tags": "[parameters('resourceTags')]",
       "name": "[concat('IRGS', copyIndex())]",
       "copy": {
         "name": "copy",
@@ -42,18 +50,21 @@ deploy.json
     {
       "type": "Microsoft.Resources/resourceGroups",
       "apiVersion": "2018-05-01",
-      "location": "[last(variables('var1'))]",
+      "location": "westeurope",
+      "tags": "[parameters('resourceTags')]",
       "name": "[concat('IResGrp', 18)]"
     },
     {
       "type": "Microsoft.Resources/resourceGroups",
       "apiVersion": "2018-05-01",
-      "location": "[parameters('par1')]",
+      "location": "westeurope",
+      "tags": "[parameters('resourceTags')]",
       "name": "[concat('IRGroup', length(parameters('obj1')))]"
     }
   ],
   "outputs": {}
 }
+
 ```
 
 You connect to the subscription and run the following command.
@@ -89,6 +100,7 @@ NOTE: Each correct selection is worth one point.
 
    Answer: Yes  
      - It's Yes because all resource groups were created in the East US Azure Region.
+
 
 
 **additional question**  
