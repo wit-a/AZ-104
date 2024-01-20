@@ -89,3 +89,19 @@ NOTE: Each correct selection is worth one point.
 
    Answer: Yes  
      - It's Yes because all resource groups were created in the East US Azure Region.
+
+
+**additional question**  
+what is the difference between Parameters:  
+```powershell
+New-AzDeployment –TemplateFile 
+New-AzDeployment –TemplateUri
+```
+Use a custom template and parameter file to create a deployment.
+```powershell
+New-AzDeployment -Location "West US" -TemplateFile "D:\Azure\Templates\example.json" 
+```
+Deploy a template stored in a  public storage.
+```powershell
+New-AzDeployment -Location "West US" -TemplateUri "https://example.com/example.json"
+```
