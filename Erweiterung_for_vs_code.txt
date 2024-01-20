@@ -1,0 +1,10 @@
+Azure Resource Manager Tools. 
+https://marketplace.visualstudio.com/items?itemName=msazurermtools.azurerm-vscode-tools
+entweder die Azure-Befehlszeilenschnittstelle 
+
+https://learn.microsoft.com/de-de/cli/azure/
+Windows
+https://learn.microsoft.com/de-de/cli/azure/install-azure-cli-windows?tabs=azure-cli
+
+oder Azure PowerShell-Modul
+https://learn.microsoft.com/de-de/powershell/azure/new-azureps-module-az?view=azps-11.2.0

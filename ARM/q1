@@ -1,0 +1,52 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.jsonfi",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "obj1": {
+      "type": "object",
+      "defaultValue": {
+        "propA": "one",
+        "propB": "two",
+        "propC": "three",
+        "propD": {
+          "propD-1": "sub",
+          "propD-2": "sub"
+        }
+      }
+    },
+    "par1": {
+      "type": "string",
+      "allowedValues": ["centralus", "eastus", "westus"],
+      "defaultValue": "eastus"
+    }
+  },
+  "variables": {
+    "var1": "westus",
+    "centralus": "eastus"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/resourceGroups",
+      "apiVersion": "2018-05-01",
+      "location": "eastus",
+      "name": "[concat('IRGS', copyIndex())]",
+      "copy": {
+        "name": "copy",
+        "count": 2
+      }
+    },
+    {
+      "type": "Microsoft.Resources/resourceGroups",
+      "apiVersion": "2018-05-01",
+      "location": "[last(variables('var1'))]",
+      "name": "[concat('IResGrp', 18)]"
+    },
+    {
+      "type": "Microsoft.Resources/resourceGroups",
+      "apiVersion": "2018-05-01",
+      "location": "[parameters('par1')]",
+      "name": "[concat('IRGroup', length(parameters('obj1')))]"
+    }
+  ],
+  "outputs": {}
+}
